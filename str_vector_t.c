@@ -9,9 +9,10 @@ str_vector_t * str_vector_new(){
 };
 
 void str_vector_append(str_vector_t *vector, char *string){
+	char *copy = strdup(string);
 	vector->tam++;
 	vector->str = (char **) realloc(vector->str, (vector->tam) * sizeof(char **));
-	vector->str[vector->tam-1] = string;
+	vector->str[vector->tam-1] = copy;
 };
 
 void str_vector_append_sorted(str_vector_t *vector, char *string, enum sort_mode mode){

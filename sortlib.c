@@ -19,13 +19,7 @@ int sort_file (/*@ in @*/  FILE *fpin,
 		}
 		
 		while(fgets(line, BUFSIZ, fpin) != NULL){
-			char *aux = malloc(strlen(line)+1);
-			if(aux == NULL){
-				output_error(fpin, -E_READ_ERROR);
-				exit(-E_READ_ERROR);
-			}
-			strcpy(aux, line);
-			str_vector_append(array, aux);
+			str_vector_append(array, line);
 		}
 
 		str_vector_sort(array, mode);
