@@ -106,14 +106,14 @@ int main(int argc, char *argv[]){
     if(count){
         if((shuffle) || (reverse) || (output != NULL)){
             puts("Warning: se ignorarán los argumentos: \"-o , --output <archivo>, -s, --shuffle, -r, --reverse\".");
-        } 
+        }
         sort_file(input, output, 0, 0, count);
-        exit(0);
     }else{
 		sort_file(input, output, reverse, shuffle, count);
 	}
-	
-    fclose(input); fclose(output);
-    
+
+    if(input != stdin)   fclose(input);
+    if(output != stdout) fclose(output);
+
     return 0;
 }
