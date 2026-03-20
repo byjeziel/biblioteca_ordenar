@@ -20,7 +20,7 @@
 		exit(-E_READ_ERROR);\
 	}\
 	strcpy(aux, elemento);\
-	if(index <= vector->tam){\
+	if(index < vector->tam){\
 		(vector->str[index] = aux);\
 	}else{\
 		printf("WARNING: El elemento se introducira al final de vector (%d), ya que no existe la posicion %d\n", vector->tam, index);\
