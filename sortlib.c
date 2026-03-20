@@ -28,12 +28,14 @@ int sort_file (/*@ in @*/  FILE *fpin,
 			fputs(array->str[i], fpout);
 		}
 	}else{
-		int count = 0; char c;
+		int count = 0;
+		int last_was_newline = 1;
+		int c;
 		while((c = getc(fpin)) != EOF){
-			if(c == '\n'){
-				count++;	
-			}
+			last_was_newline = (c == '\n');
+			if(last_was_newline) count++;
 		}
+		if(!last_was_newline) count++;
 		printf("Total de lineas en el archivo: %d\n", count);
 	}
 	
