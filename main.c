@@ -80,30 +80,27 @@ int main(int argc, char *argv[]){
         return 2;
     }
     
-    if((arg_i != NULL) && (!(input = fopen(arg_i,"r")))){
-        output_error(stderr, -E_FILE_ERROR);
-        perror(" ");
-        exit(-E_FILE_ERROR);  
-    }
-
-    if((arg_o != NULL) && (!(output = fopen(arg_o,"w")))){
-        output_error(stderr, -E_FILE_ERROR);
-        perror(" ");
-        exit(-E_FILE_ERROR);  
-    }
-    
     if(arg_i == NULL){
 		input = stdin;
-		arg_i = "STDIN";
 	}else{
 		input = fopen(arg_i,"r");
+		if(input == NULL){
+			output_error(stderr, -E_FILE_ERROR);
+			perror(" ");
+			return -E_FILE_ERROR;
+		}
 	}
-	
+
 	if(arg_o == NULL){
 		output = stdout;
-		arg_o = "STDOUT";
 	}else{
-		output = fopen(arg_o,"w");	
+		output = fopen(arg_o,"w");
+		if(output == NULL){
+			output_error(stderr, -E_FILE_ERROR);
+			perror(" ");
+			if(input != stdin) fclose(input);
+			return -E_FILE_ERROR;
+		}
 	}
     
     if(count){
